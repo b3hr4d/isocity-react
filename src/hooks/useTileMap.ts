@@ -1,13 +1,7 @@
 import { useCallback, useState } from "react";
-import Background from "./components/Background";
-import Foreground from "./components/Foreground";
-import { useCanvasContext } from "./context/context";
+import { useCanvasContext } from "../context/context";
 
-interface AppProps {}
-
-const App: React.FC<AppProps> = () => {
-  const { width, height } = useCanvasContext();
-
+const useTileMap = () => {
   const { tileNumber } = useCanvasContext();
 
   const [tileMap, setTileMap] = useState<Uint8Array>(
@@ -25,12 +19,7 @@ const App: React.FC<AppProps> = () => {
     [tileNumber]
   );
 
-  return (
-    <div style={{ position: "relative", width, height, margin: "auto" }}>
-      <Background tileMap={tileMap} />
-      <Foreground tileChanger={tileChanger} />
-    </div>
-  );
+  return { tileChanger, tileMap };
 };
 
-export default App;
+export default useTileMap;
